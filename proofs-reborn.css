@@ -1,0 +1,368 @@
+:root {
+    --color-green: #00FF00;
+    --color-blue: #005AFF;
+    --color-purple: #FF00FF;
+    --color-orange: #FF8E00;
+    --color-yellow: #FEFE00;
+    --color-black: #000000;
+    --color-white: #FFFFFF;
+    --color-gray: #808080;
+}
+@font-face {
+    font-family: 'AmericanTypewriter';
+    src: url('开始页与HOME页图片、文案、字体、指引/所使用的字体/AmericanTypewriter.ttc') format('truetype');
+}
+@font-face {
+    font-family: 'AmericanTypewriter';
+    src: url('开始页与HOME页图片、文案、字体、指引/所使用的字体/EBGaramond-Regular.ttf') format('truetype');
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'AmericanTypewriter', monospace;
+    background: #f5f5f5;
+    color: var(--color-black);
+    overflow-x: hidden;
+    cursor: auto;
+}
+.proofs-reborn-page {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background: url('B页背景图.png') center/cover no-repeat;
+}
+.proofs-reborn-container {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+.page-header {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    z-index: 100;
+}
+.page-title {
+    font-family: 'AmericanTypewriter', monospace;
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--color-blue);
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+.video-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 200;
+}
+.video-frame {
+    position: relative;
+    width: 720px;
+    height: 480px;
+    border: 16px solid var(--color-orange); 
+    border-radius: 0; 
+    overflow: hidden;
+    cursor: none; 
+    transition: all 0.3s ease;
+    background: var(--color-white);
+}
+.video-frame:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px rgba(255, 142, 0, 0.3);
+}
+.video-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.custom-cursor {
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: translate(-50%, -50%);
+}
+.custom-cursor.show {
+    opacity: 1;
+}
+.cursor-play-icon {
+    width: 80px;
+    height: 80px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    object-fit: contain; 
+}
+.ascii-images-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 250; 
+    pointer-events: none;
+}
+.ascii-image {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+.nav-menu {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    z-index: 300;
+}
+.nav-toggle {
+    width: 40px;
+    height: 40px;
+    background: var(--color-white);
+    border-radius: 0; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--color-black);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+.nav-toggle:hover {
+    background: var(--color-orange);
+    color: var(--color-white);
+}
+.nav-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: var(--color-white);
+    border-radius: 0; 
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    padding: 0;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+.nav-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.nav-option {
+    padding: 12px 20px;
+    font-family: 'AmericanTypewriter', monospace;
+    font-size: 16px;
+    color: var(--color-black);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-left: none;
+    text-decoration: none;
+    display: block;
+    position: relative;
+    text-align: center;
+}
+
+.nav-option[data-state="proofs-in-time"] {
+    color: #005AFF; 
+}
+
+.nav-option[data-state="proofs-reborn"] {
+    color: #FEFE00; 
+}
+
+.nav-option[data-state="ports-of-proof"] {
+    color: #FF00FF; 
+}
+.nav-option[data-state="home"]:hover {
+    background: var(--color-green);
+    color: var(--color-white);
+}
+.nav-option[data-state="proofs-in-time"]:hover {
+    background: var(--color-blue);
+    color: var(--color-white);
+}
+.nav-option[data-state="proofs-reborn"]:hover {
+    background: var(--color-orange);
+    color: var(--color-white);
+}
+.nav-option[data-state="ports-of-proof"]:hover {
+    background: var(--color-purple);
+    color: var(--color-white);
+}
+.nav-option.active {
+    color: var(--color-white);
+    font-weight: bold;
+}
+.nav-option[data-state="home"].active {
+    background: var(--color-green);
+}
+.nav-option[data-state="proofs-in-time"].active {
+    background: var(--color-blue);
+}
+.nav-option[data-state="proofs-reborn"].active {
+    background: var(--color-orange);
+}
+.nav-option[data-state="ports-of-proof"].active {
+    background: var(--color-purple);
+}
+.page-logo {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 1000;
+}
+.logo-img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+.yellow-text-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #FEFE00;
+    z-index: 500;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+}
+.yellow-text-overlay.scroll-active {
+    transform: translateY(0);
+}
+.yellow-text-content {
+    padding: 60px 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    color: #FF8E00;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.orange-bar {
+    height: 30px;
+    background: #FF8E00;
+    margin: 0;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'AmericanTypewriter', monospace;
+    font-size: 20px;
+    font-weight: bold;
+    color: #FEFE00;
+    text-transform: uppercase;
+    z-index: 1000;
+}
+
+.orange-bar span {
+    margin: 0 1px;
+}
+
+.yellow-section {
+    padding: 40px 0;
+    line-height: 1.3;
+    text-align: center;
+}
+
+.yellow-section p {
+    margin-bottom: 0;
+    font-size: 20px;
+    font-family: 'AmericanTypewriter', monospace;
+    color: #FF8E00;
+    line-height: 1.5;
+}
+
+.proofs-reborn-letters {
+    text-align: center;
+    margin: 40px 0;
+}
+.proofs-reborn-letters span {
+    font-family: 'AmericanTypewriter', monospace;
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0 3px;
+    display: inline-block;
+    animation: letterBounce 2s ease-in-out infinite;
+    color: var(--color-black);
+}
+.proofs-reborn-letters span:nth-child(1) { animation-delay: 0s; }     
+.proofs-reborn-letters span:nth-child(2) { animation-delay: 0.1s; }   
+.proofs-reborn-letters span:nth-child(3) { animation-delay: 0.2s; }   
+.proofs-reborn-letters span:nth-child(4) { animation-delay: 0.3s; }   
+.proofs-reborn-letters span:nth-child(5) { animation-delay: 0.4s; }   
+.proofs-reborn-letters span:nth-child(6) { animation-delay: 0.5s; }   
+.proofs-reborn-letters span:nth-child(7) { animation-delay: 0.6s; }   
+.proofs-reborn-letters span:nth-child(8) { animation-delay: 0.7s; }   
+.proofs-reborn-letters span:nth-child(9) { animation-delay: 0.8s; }   
+.proofs-reborn-letters span:nth-child(10) { animation-delay: 0.9s; }  
+.proofs-reborn-letters span:nth-child(11) { animation-delay: 1.0s; }  
+.proofs-reborn-letters span:nth-child(12) { animation-delay: 1.1s; }  
+.proofs-reborn-letters span:nth-child(13) { animation-delay: 1.2s; }  
+.yellow-text-content p {
+    font-family: 'AmericanTypewriter', monospace;
+    font-size: 20px;
+    margin-bottom: 24px;
+    color: var(--color-orange);
+}
+@keyframes letterBounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 24px;
+    }
+    .video-frame {
+        width: 80vw;
+        height: 50vw;
+        max-width: 400px;
+        max-height: 250px;
+    }
+    .play-icon {
+        width: 60px;
+        height: 60px;
+    }
+    .ascii-image {
+        width: 240px;
+        height: 240px;
+    }
+    .yellow-text-content {
+        padding: 40px 20px;
+    }
+    .proofs-reborn-letters span {
+        font-size: 32px;
+        margin: 0 2px;
+    }
+    .yellow-text-content p {
+        font-size: 16px;
+    }
+    .nav-dropdown {
+        min-width: 150px;
+    }
+}
