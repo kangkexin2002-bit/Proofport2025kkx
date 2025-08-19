@@ -244,7 +244,8 @@ function initializeImages() {
             if (month === '25.5') folderName = `${month}完成图(白描边`;
             if (month === '25.7') folderName = `${month}完成图（白描边）`;
 
-            img.src = `A页图片+文案+需求/A页image/${folderName}/${receipt}`;
+            const imagePath = `A页图片+文案+需求/A页image/${folderName}/${receipt}`;
+            img.src = encodeURI(imagePath);
             img.className = 'receipt-img';
             img.dataset.month = month;
             img.dataset.index = index;
