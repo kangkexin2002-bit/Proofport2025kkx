@@ -244,7 +244,7 @@ function initializeImages() {
             if (month === '25.5') folderName = `${month}完成图(白描边`;
             if (month === '25.7') folderName = `${month}完成图（白描边）`;
 
-            const imagePath = `A页图片+文案+需求/A页image/${folderName}/${receipt}`;
+            const imagePath = `A页图片文案需求/A页image/${folderName}/${receipt}`;
             img.src = encodeURI(imagePath);
             img.className = 'receipt-img';
             img.dataset.month = month;
@@ -552,7 +552,7 @@ function openImageModal(img) {
     if (month === '25.5') folderName = `${month}完成图(白描边`;
     if (month === '25.7') folderName = `${month}完成图（白描边）`;
 
-    const timeCodeImagePath = `A页图片+文案+需求/A页image/${folderName}/${month}时间${index.toString().padStart(2, '0')}.png`;
+    const timeCodeImagePath = `A页图片文案需求/A页image/${folderName}/${month}时间${index.toString().padStart(2, '0')}.png`;
 
     modal.innerHTML = `
         <div class="modal-content">
