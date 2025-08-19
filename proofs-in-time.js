@@ -158,11 +158,11 @@ const receiptData = {
 };
 
 let countdownInterval;
-let totalTimeInSeconds = 12408 * 3600; 
+let totalTimeInSeconds = 12408 * 3600;
 let currentTimeInSeconds = totalTimeInSeconds;
 let allImages = [];
 let lastFadeTime = 0;
-let fadeInterval = 202066.06; 
+let fadeInterval = 202066.06;
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -198,16 +198,16 @@ function initializeImages() {
 
     const containerWidth = window.innerWidth;
     const containerHeight = window.innerHeight;
-    const headerHeight = 120; 
-    const footerHeight = 100; 
-    const sideMargin = 80; 
+    const headerHeight = 120;
+    const footerHeight = 100;
+    const sideMargin = 80;
 
     const availableWidth = containerWidth - (sideMargin * 2);
     const availableHeight = containerHeight - headerHeight - footerHeight;
 
     const imgWidth = 150;
     const imgHeight = 200;
-    const padding = 20; 
+    const padding = 20;
 
     const cols = Math.floor(availableWidth / (imgWidth + padding));
     const rows = Math.ceil(availableHeight / (imgHeight + padding));
@@ -244,20 +244,21 @@ function initializeImages() {
             if (month === '25.5') folderName = `${month}完成图(白描边`;
             if (month === '25.7') folderName = `${month}完成图（白描边）`;
 
-            img.src = `A页图片+文案+需求/A页image/${folderName}/${receipt}`;
+            const imagePath = `A页图片文案需求/A页image/${folderName}/${receipt}`;
+            img.src = encodeURI(imagePath);
             img.className = 'receipt-img';
             img.dataset.month = month;
             img.dataset.index = index;
-            img.dataset.fadeOrder = allImages.length; 
+            img.dataset.fadeOrder = allImages.length;
             img.dataset.receiptFile = receipt;
 
             const position = positions[imageCount];
-            const x = position.x + (Math.random() - 0.5) * 20; 
+            const x = position.x + (Math.random() - 0.5) * 20;
             const y = position.y + (Math.random() - 0.5) * 20;
 
             img.style.left = x + 'px';
             img.style.top = y + 'px';
-            img.style.zIndex = '250'; 
+            img.style.zIndex = '250';
 
             img.dataset.initialX = x;
             img.dataset.initialY = y;
@@ -270,7 +271,7 @@ function initializeImages() {
     });
 
     const calculatedHeight = Math.max(containerHeight, Math.ceil(totalImages / cols) * (imgHeight + padding) + headerHeight + footerHeight);
-    const minScrollableHeight = window.innerHeight * 2; 
+    const minScrollableHeight = window.innerHeight * 2;
     const finalHeight = Math.max(calculatedHeight, minScrollableHeight);
 
     backgroundImages.style.height = finalHeight + 'px';
@@ -297,7 +298,7 @@ function initializeCountdown() {
         updateCountdownDisplay();
         handleImageFading();
 
-    }, 1000); 
+    }, 1000);
 }
 
 function updateCountdownDisplay() {
@@ -385,7 +386,7 @@ function initializeGreenOverlay() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const windowHeight = window.innerHeight;
         const documentHeight = document.documentElement.scrollHeight;
-        const bottomThreshold = 50; 
+        const bottomThreshold = 50;
 
         const isAtBottom = scrollTop + windowHeight >= documentHeight - bottomThreshold;
         const isOverlayActive = greenTextOverlay.classList.contains('scroll-active');
@@ -440,7 +441,7 @@ function initializeGreenOverlay() {
         } else if (!isAtBottom) {
 
             console.log('Not at bottom - allowing normal scroll');
-            scrollAccumulation = 0; 
+            scrollAccumulation = 0;
             return;
         }
     }, { passive: false });
@@ -546,13 +547,13 @@ function openImageModal(img) {
     modal.className = 'image-modal';
 
     const month = img.dataset.month;
-    const index = parseInt(img.dataset.index) + 1; 
+    const index = parseInt(img.dataset.index) + 1;
     let folderName = `${month}完成图（白描边`;
     if (month === '25.5') folderName = `${month}完成图(白描边`;
     if (month === '25.7') folderName = `${month}完成图（白描边）`;
 
-    const timeCodeImagePath = `A页图片+文案+需求/A页image/${folderName}/${month}时间${index.toString().padStart(2, '0')}.png`;
-
+    const timeCodeImagePath = `A页图片文案需求/A页image/${folderName}/${month}时间${index.toString().padStart(2, '0')}.png`;
+    const timeCodeImagePathAfter = encodeURI(timeCodeImagePath);
     modal.innerHTML = `
         <div class="modal-content">
             <div class="modal-header">
@@ -567,7 +568,7 @@ function openImageModal(img) {
                 </div>
                 <div class="modal-section">
                     <h4>这是"时间编码"</h4>
-                    <img src="${timeCodeImagePath}" alt="时间编码" class="modal-time-code-img">
+                    <img src="${timeCodeImagePathAfter}" alt="时间编码" class="modal-time-code-img">
                     <p class="time-description">每个月份里"收据图片"和"时间编码"的文件数字后缀是一样的</p>
                 </div>
             </div>
@@ -637,12 +638,12 @@ function flyImage(img) {
     if (maxDown > 0) possibleDirections.push('down');
 
     if (possibleDirections.length === 0) {
-        return; 
+        return;
     }
 
     const direction = possibleDirections[Math.floor(Math.random() * possibleDirections.length)];
 
-    const moveDistance = 75; 
+    const moveDistance = 75;
 
     let deltaX = 0, deltaY = 0;
 
@@ -673,7 +674,7 @@ function flyImage(img) {
         img.style.left = targetX + 'px';
         img.style.top = targetY + 'px';
         img.classList.remove('flying');
-    }, 800); 
+    }, 800);
 }
 
 function initializeCountdownAnimation() {
@@ -693,7 +694,7 @@ function initializeCountdownAnimation() {
     const backgroundImages = document.querySelector('.background-images');
 
     function ensureScrollableHeight() {
-        const minHeight = window.innerHeight * 2; 
+        const minHeight = window.innerHeight * 2;
         const currentHeight = backgroundImages.offsetHeight;
 
         if (currentHeight < minHeight) {
@@ -705,8 +706,8 @@ function initializeCountdownAnimation() {
 
     function handleScroll() {
         const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-        const maxScroll = 400; 
-        const scrollProgress = Math.min(scrollY / maxScroll, 1); 
+        const maxScroll = 400;
+        const scrollProgress = Math.min(scrollY / maxScroll, 1);
 
         const startTop = 20;
         const endTop = window.innerHeight * 0.5;
@@ -721,7 +722,7 @@ function initializeCountdownAnimation() {
             countdownContainer.style.transform = `translateX(-50%) translateY(${scrollProgress > 0.5 ? '-50%' : '0'})`;
             countdownTimer.style.transform = `scale(${currentScale})`;
 
-            const opacity = 0.7 + (0.3 * scrollProgress); 
+            const opacity = 0.7 + (0.3 * scrollProgress);
             countdownContainer.style.opacity = opacity;
         });
 
